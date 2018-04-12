@@ -6,14 +6,18 @@ let cards = ['fa-diamond','fa-diamond', 'fa-paper-plane-o','fa-paper-plane-o',
 // Variable declarations
 let flippedCards;
 let matchedCards;
-let moves;
+var moves;
 let allowed;
+
+// declare modal
+let modal = document.getElementById("popup1")
+
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length;
     var temporaryValue;
-    var randomIndex;
+    var randomIndex;    
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
@@ -29,8 +33,9 @@ function shuffle(array) {
 function startGame() {
   flippedCards = [];
   matchedCards = 0;
-  moves = 0;
+  moves = 0;  
   allowed = true;
+  updateMoves();
   
   // Removing all children and content of deck
   $('.deck').children().remove();
@@ -54,24 +59,28 @@ function startGame() {
 }
 
 function updateMoves () {
-  console.log(moves)
-  $('.moves').text(moves);
+  // console.log(moves)
+  if((moves/2) % 1 === 0 ){
+  	$('.moves').text(moves/2);		
+  }  
+  
 }
 
 // Moves counter
 function counter() {
-    moves++;
+    //moves++;
+    updateMoves();
     if(moves == 1){
-        updateMoves();
+        
         startTimer();
     }
-    if (moves > 20 && moves <= 30) {
+    if (moves > 40 && moves <= 60) {
         starRating(1);
     }  
-    if (moves > 30 && moves <= 40)  {
+    if (moves > 60 && moves <= 80)  {
         starRating(2);
     }  
-    if (moves > 40) {
+    if (moves > 80) {
         starRating(3);
     }  
 }
@@ -84,6 +93,7 @@ function starRating(x) {
       $(starArray.pop()).attr('class', 'fa fa-star-o')
       x = x - 1;
     }
+    
 }
 
 // Game timer
@@ -113,9 +123,11 @@ $(".deck").on('click','.card', function()
   }
   
   // Disable clicking on more than two unmatched cards or cards with 'match' class
+
   if ((flippedCards.length < 2) && (! $(this).hasClass('open show')) && (! $(this).hasClass('match'))) 
   {
     // Changing star panel due to number of moves    
+    moves++;
     counter();
 
     // Show card on click
@@ -140,12 +152,22 @@ $(".deck").on('click','.card', function()
   
 // Showing a popup on completing the game
   if (matchedCards === 8) {
-      setTimeout(function() {
-          alert(`Woohoo! You completed the game with  ${moves}  moves, in ${timer.innerHTML}`);
-      }, 1000) 
-  }
-});
+    let winningMoves = moves/2;
+    clearInterval(interval);
+    setTimeout(function() {  //Win screen appears
+        document.getElementById('win').style.display = "flex";
+        document.getElementById('winning').textContent = `It took you ${winningMoves} moves to finish the game!`;
+        document.getElementById('winning3').textContent = `Your time was ${timer.innerHTML}. Please reload your browser to restart the game :)`;
+        document.getElementById('winning2').textContent = "You received a score of"+ starArray.length + "/3 stars";
+      }, 1000);
+   
+   }
+ });
 
+function playAgain(){
+    $("#win").classList.remove("show");
+    startGame();
+}
 
 $('.restart').on('click', function() {
    startGame();
