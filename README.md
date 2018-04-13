@@ -17,5 +17,5 @@ It is a basic memory challenge game consisting of deck of cards with different i
 
 ## Contributing
 1. The base code was provided by Udacity
-2. Modal style and concept is by Elliot a fellow developer (https://codepen.io/Everyone/pen/qorNdP)
+2. Modal style and concept is by Elliot a fellow developer 
 
