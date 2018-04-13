@@ -1,20 +1,21 @@
 # Memory Game Project
-
-## Table of Contents
+It is a basic memory challenge game consisting of deck of cards with different icons. When the game ends, a modal appears showing user performance i.e. total moves, total time, and star rating that the game is finished with.
 
 * [Instructions](#instructions)
-* [Contributing](#contributing)
+1. Clone the repository https://github.com/Bintehassan/memory-game-fend-udacity
+2. Open the index.html in your browser
+3. Play the game
 
 ## Instructions
+1. Click on cards
+2. Make pairs
+3. Be quick
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
-
-To get started, open `js/app.js` and start building out the app's functionality
-
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+## Known Issues
+1. Modal appearing at the end of each game does not show a star rating yet
+2. Modal appearing at the end of each game does not have a "Play Again" button and it's functionality needs improving
 
 ## Contributing
+1. The base code was provided by Udacity
+2. Modal style and concept is by Elliot a fellow developer (https://codepen.io/Everyone/pen/qorNdP)
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
