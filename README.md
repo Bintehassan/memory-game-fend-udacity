@@ -5,9 +5,9 @@ It is a basic memory challenge game consisting of deck of cards with different i
 1. Clone the repository https://github.com/Bintehassan/memory-game-fend-udacity
 2. Open the index.html in your browser
 3. Play the game
-    a. Click on cards
-    b. Make pairs
-    c. Be quick
+4. Click on cards
+5. Make pairs
+6. Be quick
 
 ## Dependencies
 The game's look and design is created with CSS and functionality is created with Javascript. Without CSS and Javascript, the game will not function.
