@@ -9,6 +9,16 @@ let matchedCards;
 var moves;
 let allowed;
 
+//Modal source: https://www.w3schools.com/howto/howto_css_modals.asp
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the button that starts the game again and resets the whole board
+var btn = document.getElementById("play-again");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length;
@@ -119,7 +129,7 @@ $(".deck").on('click','.card', function()
   
     // Disable clicking on more than two unmatched cards or cards with 'match' class
 
-     if ((flippedCards.length < 2) && (! $(this).hasClass('open show')) && (! $(this).hasClass('match'))) 
+    if ((flippedCards.length < 2) && (! $(this).hasClass('open show')) && (! $(this).hasClass('match'))) 
     {
         // Changing star panel due to number of moves    
         moves++;
@@ -132,17 +142,17 @@ $(".deck").on('click','.card', function()
     
     // Matching cards
     if (flippedCards.length === 2) {
-    if ($(flippedCards[0]).children().attr('class') === $(flippedCards[1]).children().attr('class')) 
-    {
-      $(flippedCards).addClass('match');
-      matchedCards++;
-    }
-    allowed = false
-    setTimeout(function() {
-      $(flippedCards).removeClass('open show');
-      flippedCards = [];
-      allowed = true;
-    }, 500)         
+        if ($(flippedCards[0]).children().attr('class') === $(flippedCards[1]).children().attr('class')) 
+            {
+                $(flippedCards).addClass('match');
+                matchedCards++;
+            }
+            allowed = false
+            setTimeout(function() {
+                $(flippedCards).removeClass('open show');
+                flippedCards = [];
+                allowed = true;
+            }, 500)         
     }
   
     // Showing a modal on completing the game
@@ -150,13 +160,50 @@ $(".deck").on('click','.card', function()
     let winningMoves = moves/2;
     clearInterval(interval);
     setTimeout(function() {  //Modal shows total moves, time taken and star rating
-        document.getElementById('win').style.display = "flex";
+        modal.style.display = "block";
         document.getElementById('winning').textContent = `It took you ${winningMoves} moves to finish the game!`;
-        document.getElementById('winning3').textContent = `Your time was ${timer.innerHTML}. Please reload your browser to restart the game :)`;
-        document.getElementById('winning2').textContent = "You received a score of"+ starArray.length + "/3 stars";
-      }, 1000);
+        //if winningMoves < = 20, show 3 stars
+        if(winningMoves <= 20) 
+        {
+            document.getElementById('winning2').innerHTML = "Stars you have earned <i class='fa fa-star'><i class='fa fa-star'><i class='fa fa-star'>";    
+        }
+        //if winningMoves > 20 && < = 30, show 2 stars
+        if ((winningMoves > 20) && (winningMoves <= 30)) 
+        {
+            document.getElementById('winning2').innerHTML = "Stars you have earned <i class='fa fa-star'><i class='fa fa-star'>";
+        }
+        //if winningMoves > 30 && < = 40, show 1 star
+        if ((winningMoves > 30) && (winningMoves <= 40))
+        {
+            document.getElementById('winning2').innerHTML = "Stars you have earned <i class='fa fa-star'>";
+        }
+        //if winningMoves > 40, show 0 stars, display message, you didn't earn any stars :D
+        if (winningMoves > 40)
+        {
+            document.getElementById('winning2').innerHTML = "OMG! You have earned zero stars :'(";
+        }
+        document.getElementById('winning3').textContent = `Your total time was ${timer.innerHTML} :)`;
+
+           //Play again button restarts the game and removes the modal
+            btn.onclick = function() {
+            modal.style.display = "none";
+            startGame();
+            }
+            
+            // When the user clicks on <span> (x), close the modal
+            span.onclick = function() {
+            modal.style.display = "none";
+            }       
+
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+    }, 1000);
    
-   }
+    }    
 });
 
 $('.restart').on('click', function() {
