@@ -3,7 +3,7 @@ It is a basic memory challenge game consisting of deck of cards with different i
 
 ## Instructions
 1. Clone the repository https://github.com/Bintehassan/memory-game-fend-udacity
-2. Open the index.html in your browser
+2. Open the index.html in your browser OR play here  https://bintehassan.github.io/memory-game-fend-udacity/.
 3. Play the game
 4. Click on cards
 5. Make pairs
